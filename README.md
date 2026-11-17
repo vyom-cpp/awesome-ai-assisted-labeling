@@ -1,146 +1,225 @@
-# Awesome AI-Assisted vs. Manual Scientific Data Annotation [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
+# AITR Lab 02 — Comparative NER Annotation Study
 
-> A curated collection of verified research papers, benchmarks, datasets, tools, and code comparing AI-assisted and manual data labeling accuracy on scientific datasets.
-
----
-
-## Contents
-- [Awesome AI-Assisted vs. Manual Scientific Data Annotation ](#awesome-ai-assisted-vs-manual-scientific-data-annotation-)
-  - [Contents](#contents)
-  - [Topic Overview](#topic-overview)
-  - [Self-Authored Work](#self-authored-work)
-    - [AI-Assisted Research Paper](#ai-assisted-research-paper)
-    - [Citation Integrity Audit](#citation-integrity-audit)
-  - [Curated Research Papers](#curated-research-papers)
-    - [Surveys \& Foundational Frameworks](#surveys--foundational-frameworks)
-    - [AI vs. Human Accuracy Benchmarks](#ai-vs-human-accuracy-benchmarks)
-    - [Active Learning \& Human-in-the-Loop](#active-learning--human-in-the-loop)
-    - [Quality Control \& Inter-Annotator Agreement](#quality-control--inter-annotator-agreement)
-    - [Domain Applications \& Multimodal Frontiers](#domain-applications--multimodal-frontiers)
-  - [Datasets \& Benchmarks](#datasets--benchmarks)
-  - [Tools and Libraries](#tools-and-libraries)
-  - [GitHub Implementations](#github-implementations)
-  - [Tutorials and Learning Resources](#tutorials-and-learning-resources)
-  - [License](#license)
+**Student:** Vyom Sutariya | MRA2026012 | Dept. of IT (Robotics and AI)  
+**Programme:** M.Tech Robotics and AI (MRA), AITR  
+**Lab:** 02 — Controlled Comparative Study (Pathway B)  
+**Academic year:** 2025–26
 
 ---
 
-## Topic Overview
-Supervised machine learning across scientific fields—including genomics, oncology, chemistry, and materials science—relies heavily on high-precision ground truth. Traditionally, scientific data annotation has required manual curation by Subject Matter Experts (SMEs). While manual annotation provides deep contextual validity, it creates severe scalability bottlenecks, exhibits intra-annotator drift from cognitive fatigue, and demands unsustainable domain-expert time.
+## Research Question
 
-The rise of domain-adapted transformers and foundation Large Language Models (LLMs) has popularized AI-assisted data labeling. Under this paradigm, models perform zero-shot pre-annotation, active-learning triage, or programmatic weak supervision. However, scientific text presents unique challenges: nested named entities, complex relation triplets, and strict zero-tolerance thresholds for hallucination. Research demonstrates that while autonomous AI matches human speed and consistency on coarse classification, human-in-the-loop (HITL) workflows—where AI generates candidates and experts adjudicate edge cases—remain the gold standard for high-accuracy scientific discovery.
+> *Does CRF-based NER outperform dictionary-based weak supervision and logistic-regression classifiers for biomedical disease NER, and how does annotation efficiency degrade as labelled data is reduced?*
 
----
-
-## Self-Authored Work
-
-### AI-Assisted Research Paper
-- **Title:** *Comparing AI-Assisted and Manual Data Labelling Accuracy on scientific datasets*
-- **Description:** A scholarly review examining token-level NER precision, inter-annotator agreement metrics ($\kappa$, $\alpha$), and error typology between transformer pre-labeling and human specialists.
-- **Link:** [📄 View Paper PDF](paper/AI_Assisted_Research_Paper.pdf)
-
-### Citation Integrity Audit
-- **Title:** *Lab 1: AI-Assisted Citation Integrity and Claim-Citation Audit*
-- **Description:** A systematic audit of bibliographic authenticity, DOI resolution, and claim entailment conducted on the AI-generated paper output.
-- **Link:** [🔍 View Audit PDF](citation-audit/Citation_Integrity_Audit.pdf)
+This question is a direct operationalisation of research gaps 6.1–6.3 identified in the Lab 01 thematic review: *"Comparing AI-Assisted and Manual Data Labelling Accuracy on Scientific Datasets"*.
 
 ---
 
-## Curated Research Papers
+## Quick Start
 
-### Surveys & Foundational Frameworks
-- **A Survey on Active Learning and Human-in-the-Loop Deep Learning for Medical Image Analysis** (2021) — *Budd, S., Robinson, E. C., & Glocker, B.* [*MedIA*]. [DOI: 10.1016/j.media.2021.102063](https://doi.org/10.1016/j.media.2021.102063)  
-  *Foundational review of uncertainty sampling, active learning cycles, and annotation cost reduction in clinical imaging.*
-- **A Comprehensive Survey on Deep Active Learning in Medical Image Analysis** (2024) — *Wang, H., et al.* [*MedIA*]. [DOI: 10.1016/j.media.2024.103201](https://doi.org/10.1016/j.media.2024.103201)  
-  *Taxonomy of representativeness- and uncertainty-based querying algorithms and foundation model integrations.*
-- **Transforming Data Annotation with AI Agents: A Review of Methods, Tools, and Challenges** (2025) — *Liu, Y., et al.* [*Computers*]. [DOI: 10.3390/computers14020042](https://doi.org/10.3390/computers14020042)  
-  *Analyzes modern AI agent architectures, pre-annotation pipelines, and automated verification protocols.*
-- **Human-in-the-Loop Machine Learning** (2021) — *Monarch, R. M.* [*Manning Publications*]. [Manning Book Reference](https://www.manning.com/books/human-in-the-loop-machine-learning)  
-  *Foundational reference text defining inter-annotator agreement metrics, annotation quality control, and active learning.*
+### Prerequisites
 
-### AI vs. Human Accuracy Benchmarks
-- **A Comparative Study of Zero-Shot Inference with Large Language Models and Supervised Modeling in Breast Cancer Pathology Classification** (2024) — *Sushil, M., et al.* [*arXiv* / *JCO*]. [DOI: 10.48550/arxiv.2401.13887](https://doi.org/10.48550/arxiv.2401.13887)  
-  *Benchmarks zero-shot LLM inference directly against human expert-annotated ground truth on pathology reports.*
-- **Accurate Medical Named Entity Recognition Through Specialized NLP Models** (2024) — *Hu, J., et al.* [*arXiv*]. [DOI: 10.48550/arxiv.2412.08255](https://doi.org/10.48550/arxiv.2412.08255)  
-  *Compares specialized domain transformers (BioBERT, SciBERT) against human gold standards on biomedical corpora.*
-- **Harnessing Large Language Models’ Zero-Shot and Few-Shot Learning Capabilities for Regulatory Research** (2024) — *Meshkin, H., et al.* [*Briefings in Bioinformatics*]. [DOI: 10.1093/bib/bbae354](https://doi.org/10.1093/bib/bbae354)  
-  *Quantifies zero- and few-shot LLM categorization accuracy on complex bio-regulatory texts compared to human specialists.*
-- **Comparing Human and Machine Annotations for Complex Scientific Information Extraction** (2022) — *Wadden, D., et al.* [*Findings of EACL 2022*]. [DOI: 10.18653/v1/2022.findings-eacl.84](https://doi.org/10.18653/v1/2022.findings-eacl.84)  
-  *Examines disagreement rates and structural accuracy divergences between domain-expert annotations and ML models.*
+Python 3.9+ required. Install dependencies:
 
-### Active Learning & Human-in-the-Loop
-- **A Study of Deep Active Learning Methods to Reduce Labelling Efforts in Biomedical Relation Extraction** (2023) — *Nachtegael, C., et al.* [*PLOS ONE*]. [DOI: 10.1371/journal.pone.0292356](https://doi.org/10.1371/journal.pone.0292356)  
-  *Demonstrates that uncertainty sampling reduces manual curation workload by 6% to 38% on biomedical relation extraction.*
-- **Interactive Machine Learning for Health Informatics: When Do We Need the Human-in-the-Loop?** (2016) — *Holzinger, A.* [*Brain Informatics*]. [DOI: 10.1007/s40708-016-0042-6](https://doi.org/10.1007/s40708-016-0042-6)  
-  *Outlines theoretical criteria where high-complexity biomedical data strictly demands human expert adjudication.*
-- **Transformer-Based Active Learning for Multi-Class Text Annotation in Clinical Notes** (2024) — *Al-Garadi, M. A., et al.* [*Scientific Reports*]. [DOI: 10.1038/s41598-024-74895-x](https://doi.org/10.1038/s41598-024-74895-x)  
-  *Evaluates transformer active learning pipelines on clinical datasets to reduce physician annotation burden.*
-- **Active Learning for Biomedical Article Classification with Bag-of-Entities** (2024) — *Przybyła, P.* [*Applied Sciences*]. [DOI: 10.3390/app14177945](https://doi.org/10.3390/app14177945)  
-  *Evaluates uncertainty vs. diversity query strategies to accelerate systematic biomedical document curation.*
+```bash
+pip install scikit-learn numpy pandas matplotlib scipy sklearn-crfsuite seqeval
+```
 
-### Quality Control & Inter-Annotator Agreement
-- **Automation Bias in Intelligent Clinical Decision Support Systems: A Systematic Review** (2012) — *Goddard, K., et al.* [*IJMI*]. [DOI: 10.1016/j.ijmedinf.2011.10.008](https://doi.org/10.1016/j.ijmedinf.2011.10.008)  
-  *Evaluates cognitive errors where human annotators unthinkingly accept incorrect automated suggestions.*
-- **Creating a Benchmark for Field-Specific Biomedical Named Entity Recognition: Inter-Annotator Agreement Assessment** (2020) — *Brandsen, A., et al.* [*Proc. BioNLP*]. [DOI: 10.18653/v1/2020.bionlp-1.18](https://doi.org/10.18653/v1/2020.bionlp-1.18)  
-  *Details boundary discrepancies and Cohen's kappa statistics between domain experts annotating technical text.*
-- **Learning from Disagreement: A Survey on Human Label Variation** (2021) — *Uma, A. N., et al.* [*JAIR*]. [DOI: 10.1613/jair.1.12752](https://doi.org/10.1613/jair.1.12752)  
-  *Analyzes inherent variability in expert human annotations and models disagreement beyond simple majority voting.*
-- **Crowdsourcing and Federated Labeling in Digital Pathology** (2019) — *Amgad, M., et al.* [*Modern Pathology*]. [DOI: 10.1038/s41379-019-0252-y](https://doi.org/10.1038/s41379-019-0252-y)  
-  *Compares data quality and accuracy across crowd-workers, pathology residents, and deep-learning models.*
+### Run the full experiment
 
-### Domain Applications & Multimodal Frontiers
-- **Benchmarking Large Language Models for Entity Resolution and Information Extraction in Materials Science** (2023) — *Shetty, P., et al.* [*Digital Discovery*]. [DOI: 10.1039/D3DD00055J](https://doi.org/10.1039/D3DD00055J)  
-  *Compares zero-shot LLMs against domain models for extracting synthesis parameters from chemistry papers.*
-- **Weakly Supervised Natural Language Processing for Scientific Document Information Extraction** (2020) — *Saier, T., & Färber, M.* [*Scientometrics*]. [DOI: 10.1007/s11192-020-03612-4](https://doi.org/10.1007/s11192-020-03612-4)  
-  *Assesses programmatic weak supervision against manual curation for scientific document information extraction.*
-- **Segment Anything Model for Medical Image Analysis: An Experimental Study** (2023) — *Mazurowski, M. A., et al.* [*MedIA*]. [DOI: 10.1016/j.media.2023.102918](https://doi.org/10.1016/j.media.2023.102918)  
-  *Evaluates foundation segmentation models against expert radiologist ground truth across 19 medical imaging datasets.*
-- **Segment Anything in Medical Images (MedSAM)** (2024) — *Ma, J., et al.* [*Nature Communications*]. [DOI: 10.1038/s41467-024-44824-z](https://doi.org/10.1038/s41467-024-44824-z)  
-  *Demonstrates how specialized foundation models accelerate clinician segmentation across 1.5M+ medical image-mask pairs.*
+```bash
+# From the project root
+cd /path/to/AITR_Lab02_MRA2026012_NER_Annotation
 
-*(Full bibliography available in [references/references.md](references/references.md))*
+# Run all three methods + ablation study
+python scripts/run_experiment.py
+
+# Generate figures (after experiment completes)
+python scripts/plot_results.py
+```
+
+Results are saved to the `results/` directory.
 
 ---
 
-## Datasets & Benchmarks
-- **[SciERC](http://nlp.cs.washington.edu/sciIE/)** — 500 scientific abstracts annotated with scientific entities, relations, and coreferences for evaluating span extraction accuracy.
-- **[NCBI Disease Corpus](https://www.ncbi.nlm.nih.gov/CBBresearch/Dogan/DISEASE/)** — 793 PubMed abstracts double-annotated by biomedical experts; standard benchmark for token-level precision and recall.
-- **[MIMIC-IV-Note](https://physionet.org/content/mimic-iv-note/)** — Clinical text database used to benchmark active learning and measure doctor annotation time reductions.
+## Repository Structure
 
-*(Details available in [datasets/datasets.md](datasets/datasets.md))*
+```
+AITR_Lab02_MRA2026012_NER_Annotation/
+│
+├── README.md                    ← This file
+├── research_decisions.md        ← Decision log: how gaps → research question → design
+├── baseline_validation.md       ← Method validation against literature
+├── ai_assistance_log.md         ← Transparency log of AI tool usage
+│
+├── data/
+│   ├── README.md                ← Dataset documentation
+│   └── ncbi_disease_subset.py   ← Embedded 180-sentence BIO-tagged dataset
+│
+├── src/
+│   ├── features.py              ← Feature extraction (word_features, CRF features, LR vectoriser)
+│   ├── baselines.py             ← Three NER classes: DictionaryNER, LogRegNER, CRFNER
+│   └── evaluation.py            ← seqeval-based metrics; CSV export helpers
+│
+├── scripts/
+│   ├── run_experiment.py        ← Main experiment: trains, evaluates, runs ablation
+│   └── plot_results.py          ← Reads CSVs; produces figure1 and figure2
+│
+├── configs/
+│   └── experiment_config.json   ← Experiment parameters (seed, splits, fractions)
+│
+├── results/
+│   ├── metrics.csv              ← Method × Precision/Recall/F1 (full training set)
+│   ├── ablation.csv             ← Method × Fraction × Precision/Recall/F1
+│   ├── figure1_comparison.png   ← Grouped bar chart: 3 methods × 3 metrics
+│   └── figure2_ablation.png     ← Line plot: F1 vs. training fraction (LR, CRF)
+│
+├── notebooks/
+│   └── (exploratory notebooks, if any)
+│
+└── paper/
+    └── (lab report / paper draft)
+```
 
 ---
 
-## Tools and Libraries
-- **[Label Studio](https://github.com/HumanSignal/label-studio)** — Open-source multi-modal annotation tool with machine learning backend integration for pre-labeling.
-- **[Prodigy](https://prodi.gy/)** — Active learning annotation platform designed for efficient, iterative dataset creation.
-- **[Argilla](https://github.com/argilla-io/argilla)** — Data curation platform for validating and monitoring LLM and NLP training datasets.
-- **[Snorkel](https://github.com/snorkel-team/snorkel)** — Programmatic weak supervision framework for auto-labeling data with heuristic labeling functions.
-- **[CVAT](https://github.com/cvat-ai/cvat)** — Interactive computer vision annotation tool with automated deep-learning inference.
+## Methods
 
-*(Details available in [tools/tools.md](tools/tools.md))*
-
----
-
-## GitHub Implementations
-- **[Awesome-Active-Learning-for-Medical-Image-Analysis](https://github.com/LightersWang/Awesome-Active-Learning-for-Medical-Image-Analysis)** — Implementations and benchmarks for active learning in clinical vision.
-- **[Deep_active_learning_bioRE](https://github.com/oligogenic/Deep_active_learning_bioRE)** — PyTorch codebase evaluating active learning strategies on biomedical relation extraction corpora.
-- **[Cleanlab](https://github.com/cleanlab/cleanlab)** — Python library for automatically detecting label noise and annotator errors.
-- **[MedSAM](https://github.com/bowang-lab/MedSAM)** — Official implementation of Segment Anything in Medical Images.
-- **[Prompt-Annotator](https://github.com/microsoft/annotation-assistant)** — Microsoft framework benchmarking LLM zero-shot text annotation against human standards.
-
-*(Details available in [implementations/github-repositories.md](implementations/github-repositories.md))*
+| Method | Category (Lab 01 Taxonomy) | Description |
+|---|---|---|
+| **Dictionary NER** | Weak Supervision | Greedy longest-match against ~120 hardcoded disease terms; zero-shot, no training |
+| **Logistic Regression NER** | AI-Assisted (ML-based) | Token-level LR classifier with handcrafted lexical features; independently classifies each token |
+| **CRF NER** | Hybrid / HITL Pre-labelling | sklearn-crfsuite CRF with identical features + learned label transition constraints; standard pre-neural NER baseline (Lafferty et al. 2001) |
 
 ---
 
-## Tutorials and Learning Resources
-- **[Active Learning Literature Survey (Burr Settles)](https://minds.wisconsin.edu/handle/1793/60660)** — Comprehensive primer on active learning query algorithms and uncertainty sampling.
-- **[MIT Data-Centric AI (DCAI) Course](https://dcai.csail.mit.edu/)** — Lecture notes and labs on label error detection and data quality engineering.
-- **[Label Studio ML Backend Tutorial](https://labelstud.io/guide/ml_create)** — Step-by-step guide to connecting PyTorch/Hugging Face models for pre-annotation.
-- **[Hugging Face Token Classification Guide](https://huggingface.co/learn/nlp-course/chapter7/2)** — Hands-on guide for fine-tuning biomedical NER and evaluating boundary token metrics.
-- **[Snorkel AI Programmatic Labeling Guide](https://snorkel.ai/resources/)** — Tutorial on writing weak supervision labeling functions for unlabelled text.
+## Experiment Reproduction
+
+### Step 1 — Verify installation
+
+```bash
+python -c "import sklearn, sklearn_crfsuite, seqeval, pandas, matplotlib; print('All dependencies OK')"
+```
+
+### Step 2 — Run the experiment
+
+```bash
+python scripts/run_experiment.py
+```
+
+This script:
+1. Loads 180 sentences from `data/ncbi_disease_subset.py`
+2. Splits into train (70%) / val (15%) / test (15%) with `random_state=42`
+3. Trains and evaluates DictionaryNER, LogRegNER, and CRFNER on the full training set
+4. Runs the ablation study: LR and CRF on training fractions [10%, 25%, 50%, 100%]
+5. Prints formatted result tables to stdout
+6. Saves `results/metrics.csv` and `results/ablation.csv`
+
+### Step 3 — Generate figures
+
+```bash
+python scripts/plot_results.py
+```
+
+Produces:
+- `results/figure1_comparison.png` — grouped bar chart (Precision / Recall / F1 per method)
+- `results/figure2_ablation.png` — F1 vs. training fraction line plot (LR vs. CRF; Dictionary as reference)
+
+### Step 4 — Inspect results
+
+```bash
+cat results/metrics.csv
+cat results/ablation.csv
+```
+
+---
+
+## Results
+
+> **See `results/` folder after running the experiment.**
+
+The experiment produces:
+- `results/metrics.csv` — entity-level Precision, Recall, F1 for each method on the held-out test set
+- `results/ablation.csv` — F1 at each training fraction for LR and CRF
+- `results/figure1_comparison.png` — visualisation of method comparison
+- `results/figure2_ablation.png` — visualisation of annotation efficiency degradation
+
+Expected outcome (based on literature): CRF > LR > Dictionary NER for entity-level F1; both LR and CRF degrade significantly below 25% training fraction.
+
+---
+
+## Configuration
+
+Experiment parameters are centralised in `configs/experiment_config.json`:
+
+```json
+{
+  "random_seed": 42,
+  "test_size": 0.15,
+  "val_size": 0.15,
+  "train_fractions": [0.1, 0.25, 0.5, 1.0],
+  "lr_params": {"max_iter": 1000, "C": 1.0, "solver": "lbfgs"},
+  "crf_params": {"algorithm": "lbfgs", "c1": 0.1, "c2": 0.1, "max_iterations": 100}
+}
+```
+
+---
+
+## Documentation
+
+| File | Purpose |
+|---|---|
+| [`research_decisions.md`](research_decisions.md) | Decision log — maps review gaps to research question and each experimental choice |
+| [`baseline_validation.md`](baseline_validation.md) | Validates each method against literature; documents comparison protocol |
+| [`ai_assistance_log.md`](ai_assistance_log.md) | Academic transparency — every AI-assisted step, what was accepted/rejected, verification |
+| [`data/README.md`](data/README.md) | Dataset documentation — NCBI Disease corpus description, subset construction, split protocol |
+
+---
+
+## Citation
+
+If you use this code or dataset subset in academic work, please cite:
+
+```
+Sutariya, V. (2026). AITR Lab 02: Comparative NER Annotation Study — 
+Dictionary, Logistic Regression, and CRF on NCBI Disease Corpus.
+M.Tech Robotics and AI, AITR. MRA2026012.
+```
+
+NCBI Disease Corpus:
+```
+Dogan RI, Leaman R, Lu Z. (2014). NCBI disease corpus: A resource for disease 
+name recognition and normalization. J Biomed Inform, 47:1-10.
+```
 
 ---
 
 ## License
-Distributed under the [MIT License](LICENSE).
+
+This project code is released under the **MIT License**.
+
+```
+MIT License
+
+Copyright (c) 2026 Vyom Sutariya
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
+> **Note:** The NCBI Disease Corpus is a US government work and is in the public domain. This project's embedded subset is derived from that corpus.
