@@ -1,0 +1,4 @@
+method,precision,recall,f1
+DictionaryNER,1.0,1.0,1.0
+LogRegNER,0.6875,0.6875,0.6875
+CRFNER,0.9286,0.8125,0.8667
